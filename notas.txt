@@ -25,30 +25,6 @@
 
     
 
-// Ruta de ejemplo
-app.post('/movies', async(req, res) => {
-    try {
-        const pelicula = await Pelicula.create(req.body)
-        res.status(200).json(pelicula);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({mesage: error.mesage});
-    }
-    
-   
-  });
-
-  app.get('/movies', async(req, res) => {
-    try {
-        const peliculas = await Pelicula.find({})
-
-        res.status(200).json(peliculas);
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({mesage: error.mesage});
-    }
-    
-  });
 
   app.get('/movies/upcoming', async(req, res) => {
     try {
@@ -61,20 +37,4 @@ app.post('/movies', async(req, res) => {
     }
   });
   
-  app.get('/movies/:id', async(req, res) => {
-    try {
-        const {id} = req.params
-        const movie = await Pelicula.findById(id)
-        res.status(200).json(movie);
-    } catch (error) {
-       
-        res.status(500).send({mesage: error.mesage});
-    }
-  });
-  
-// Puerto en el que se ejecutará el servidor
-const port = 3000;
-
-// app.listen(port, () => {
-//     console.log(`Servidor Express iniciado en el puerto ${port}`);
-// });
+ 
