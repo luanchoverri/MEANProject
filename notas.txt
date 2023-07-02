@@ -1,0 +1,80 @@
+🦺 ✅🎦👷‍♀️👷‍♂️🎫🎟️🎞️🔧⚙️🔖🏷️🍬🍿🚧🚨🚀❓‼️❌⚠️✅❎🟡🟢🔴🟠
+
+
+🎦 Peliculas
+
+✅  GET /movies: Obtener una lista de películas en cartelera.
+    GET /movies/{id}: Obtener los detalles de una película específica por su ID.
+    GET /movies/genres/{genre}: Obtener una lista de películas por género.
+✅   GET /movies/upcoming: Obtener una lista de próximos estrenos de películas.
+
+⏰ Horarios
+    GET /showtimes: Obtener una lista de los horarios de proyección de las películas.
+    GET /showtimes/{id}: Obtener los detalles de un horario de proyección específico por su ID.
+
+🎫 Tickets
+    POST /bookings: Crear una nueva reserva de boletos.
+    DELETE /bookings/{id}: Cancelar una reserva de boletos.
+    PUT /bookings/{id}: Actualizar una reserva de boletos existente. ??
+
+🎞️
+    POST /reviews: Enviar una reseña de una película.
+    PUT /reviews/{id}: Actualizar una reseña de película existente.
+    DELETE /reviews/{id}: Elminar una reseña de película.
+
+
+    
+
+// Ruta de ejemplo
+app.post('/movies', async(req, res) => {
+    try {
+        const pelicula = await Pelicula.create(req.body)
+        res.status(200).json(pelicula);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({mesage: error.mesage});
+    }
+    
+   
+  });
+
+  app.get('/movies', async(req, res) => {
+    try {
+        const peliculas = await Pelicula.find({})
+
+        res.status(200).json(peliculas);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({mesage: error.mesage});
+    }
+    
+  });
+
+  app.get('/movies/upcoming', async(req, res) => {
+    try {
+        const currentDate =  new Date()
+        const upcomingMovies = await Pelicula.find({ estreno: { $gt: currentDate } }) 
+        res.status(200).json(upcomingMovies);
+    } catch (error) {
+        
+        res.status(500).send({mesage: error.mesage});
+    }
+  });
+  
+  app.get('/movies/:id', async(req, res) => {
+    try {
+        const {id} = req.params
+        const movie = await Pelicula.findById(id)
+        res.status(200).json(movie);
+    } catch (error) {
+       
+        res.status(500).send({mesage: error.mesage});
+    }
+  });
+  
+// Puerto en el que se ejecutará el servidor
+const port = 3000;
+
+// app.listen(port, () => {
+//     console.log(`Servidor Express iniciado en el puerto ${port}`);
+// });
