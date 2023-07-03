@@ -22,7 +22,7 @@ const peliculaSchema = new Schema({
   protagonistas:  { type: Array},
   director:       { type: Array, required: true  },
   duracion:       { type: Number, required: true  },
-  image:           { type: String  },
+  image:          { type: String}
 
 });
 

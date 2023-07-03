@@ -3,10 +3,10 @@
 
 🎦 Peliculas
 
-✅  GET /movies: Obtener una lista de películas en cartelera.
-    GET /movies/{id}: Obtener los detalles de una película específica por su ID.
-    GET /movies/genres/{genre}: Obtener una lista de películas por género.
-✅   GET /movies/upcoming: Obtener una lista de próximos estrenos de películas.
+✅  GET /movies Obtener una lista de películas en cartelera.
+✅  GET /movies:id Obtener los detalles de una película específica por su ID.
+     GET /movies/genres/{genre}: Obtener una lista de películas por género.
+✅   GET /movies/upcomings: Obtener una lista de próximos estrenos de películas.
 
 ⏰ Horarios
     GET /showtimes: Obtener una lista de los horarios de proyección de las películas.
@@ -24,17 +24,3 @@
 
 
     
-
-
-  app.get('/movies/upcoming', async(req, res) => {
-    try {
-        const currentDate =  new Date()
-        const upcomingMovies = await Pelicula.find({ estreno: { $gt: currentDate } }) 
-        res.status(200).json(upcomingMovies);
-    } catch (error) {
-        
-        res.status(500).send({mesage: error.mesage});
-    }
-  });
-  
- 

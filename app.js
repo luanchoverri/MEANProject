@@ -1,12 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
-var routes = require('./routes/index')
-
-
 
 
 const app = express();
 app.use(express.json()) //middware para parsear jsons
+
+var routes = require('./routes/index')
 app.use("/api", routes);  // Cargamos las rutas
 
 
